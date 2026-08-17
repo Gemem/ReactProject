@@ -19,6 +19,7 @@ function ExpenseList({ expenses, onDeleteExpense }) {
             type="button"
             className="delete-button"
             onClick={() => onDeleteExpense(expense.id)}
+            aria-label={`Delete ${expense.description}`}
           >
             Delete
           </button>
