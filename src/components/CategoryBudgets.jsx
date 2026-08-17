@@ -29,6 +29,7 @@ function CategoryBudgetRow({ category, spent, budget, onChangeBudget }) {
           value={budget || ''}
           placeholder="No limit"
           onChange={(event) => onChangeBudget(category, event.target.value)}
+          inputMode="decimal"
         />
       </div>
 
