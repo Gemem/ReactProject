@@ -5,6 +5,7 @@ function ExpenseForm({ onAddExpense }) {
   const [description, setDescription] = useState('')
   const [amount, setAmount] = useState('')
   const [category, setCategory] = useState(CATEGORIES[0])
+  const [error, setError] = useState('')
 
   const descriptionId = useId()
   const amountId = useId()
@@ -13,10 +14,23 @@ function ExpenseForm({ onAddExpense }) {
   function handleSubmit(event) {
     event.preventDefault()
 
+    const trimmedDescription = description.trim()
+    const parsedAmount = Number(amount)
+
+    if (!trimmedDescription) {
+      setError('Enter a description for the expense.')
+      return
+    }
+
+    if (!amount || Number.isNaN(parsedAmount) || parsedAmount <= 0) {
+      setError('Enter an amount greater than zero.')
+      return
+    }
+
     onAddExpense({
       id: crypto.randomUUID(),
-      description,
-      amount: Number(amount),
+      description: trimmedDescription,
+      amount: parsedAmount,
       category,
       date: new Date().toISOString(),
     })
@@ -24,6 +38,7 @@ function ExpenseForm({ onAddExpense }) {
     setDescription('')
     setAmount('')
     setCategory(CATEGORIES[0])
+    setError('')
   }
 
   return (
@@ -66,6 +81,12 @@ function ExpenseForm({ onAddExpense }) {
           ))}
         </select>
       </div>
+
+      {error && (
+        <p className="form-error" role="alert">
+          {error}
+        </p>
+      )}
 
       <button type="submit">Add expense</button>
     </form>
