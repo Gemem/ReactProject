@@ -11,7 +11,7 @@ function ExpenseSummary({ expenses }) {
   return (
     <div className="expense-summary">
       <span>Total spent</span>
-      <strong>{formatCurrency(total)}</strong>
+      <strong aria-live="polite">{formatCurrency(total)}</strong>
     </div>
   )
 }
