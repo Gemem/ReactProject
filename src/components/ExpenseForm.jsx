@@ -51,6 +51,7 @@ function ExpenseForm({ onAddExpense }) {
           value={description}
           onChange={(event) => setDescription(event.target.value)}
           placeholder="Coffee"
+          maxLength={80}
         />
       </div>
 
