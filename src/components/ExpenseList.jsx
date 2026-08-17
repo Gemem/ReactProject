@@ -6,6 +6,10 @@ function formatCurrency(amount) {
 }
 
 function ExpenseList({ expenses, onDeleteExpense }) {
+  if (expenses.length === 0) {
+    return <p className="empty-state">No expenses yet. Add one above.</p>
+  }
+
   return (
     <ul className="expense-list">
       {expenses.map((expense) => (
